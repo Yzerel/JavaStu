@@ -3,5 +3,4 @@
 /JavaStu.iml
 !/data/
 !/src/
-.gitignore
-data/out/
+!/.gitignore
