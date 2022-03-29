@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.godc.MybatisTest.Mapper.MyPerson">
+    <select id="getPersonID" resultType="com.godc.MybatisTest.Bean.Person">
+        select id as id, name as name, gender as Gender from test where id = #{id}
+    </select>
+    <select id="getMuchPerson" resultType="com.godc.MybatisTest.Bean.Person">
+        select id as id, name as name, gender as Gender from test where id > #{id}
+    </select>
+    <select id="getMapPerson" resultType="map">
+        select id as id, name as name, gender as Gender from test where id = #{id}
+    </select>
+    <select id="getMapPersonKV" resultType="com.godc.MybatisTest.Bean.Person">
+        select id as id, name as name, gender as Gender from test where id > #{id}
+    </select>
+    <!-- 未使用注解时只能用参数位置对应参数-->
+    <select id="getRangePerson" resultType="com.godc.MybatisTest.Bean.Person">
+        select id as id, name as name, gender as Gender from test where id between #{0} and #{1}
+    </select>
+
+    <!-- 使用 @Param("startid") 注解时能指定参数名使用参数-->
+    <!--
+    <select id="getRangePerson2" resultType="com.godc.MybatisTest.Bean.Person">
+        select id as id, name as name, gender as Gender from test where id between #{startid} and #{stopid}
+    </select>
+    -->
+    <!-- 使用 大于小于时会报错，可以使用下面的符号代替 &lt;= 代替大于等于，&lt;= 代替小于等 -->
+    <select id="getRangePerson2" resultType="com.godc.MybatisTest.Bean.Person">
+        select id as id, name as name, gender as Gender from test where id &lt;= #{startid} and id &lt;= #{stopid}
+    </select>
+    <!-- 测试能否获取另一个 java.bean: MyBoy 的数据-->
+    <select id="getMyBoy" resultType="com.godc.MybatisTest.Bean.MyBoy">
+        select id as id, name as name from test where id = #{id}
+    </select>
+</mapper>
